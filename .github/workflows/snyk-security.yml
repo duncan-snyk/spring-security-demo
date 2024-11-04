@@ -54,7 +54,7 @@ jobs:
         # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
         # Use || true to not fail the pipeline
       - name: DEBUG
-        run: echo "TOKEN TIME $SNYK_TOKEN"
+        run: echo "TOKEN $SNYK_TOKEN"
 
       - name: Snyk Code test
         run: snyk code test --debug --org=6a72044c-629a-4d2f-b8c9-4f6b386c9b27 --sarif # > snyk-code.sarif || true
