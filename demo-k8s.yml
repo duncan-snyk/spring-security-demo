@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sec-demo
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      sec: web
+  template:
+    metadata:
+      labels:
+        sec: web
+    spec:
+      containers:
+        - name: sec-site
+          image: duncan/security-demo
+          imagePullPolicy: Never
+          env:
+          - name: spring_profiles_active
+            valueFrom:
+              configMapKeyRef:
+                name: security-demo-config
+                key: SPRING_PROFILES
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sec-entrypoint
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    sec: web
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30001
