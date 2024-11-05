@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: sec-site
-          image: duncan/security-demo
+          image: duncan/spring-security-demo
           imagePullPolicy: Never
           env:
           - name: spring_profiles_active

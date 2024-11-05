@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 @Configuration
 @Profile("insecure")
-public class InsecureSecurityConfig extends BaseSecurityConfig {
+public class InsecureSecurityConfig extends BaseSecurityConfig { 
 
 	public static Logger log = LoggerFactory.getLogger(InsecureSecurityConfig.class);
 

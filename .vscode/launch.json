@@ -2,12 +2,22 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Spring Boot-SecurityDemoApplication<spring-security-demo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "org.grantharper.websecurity.SecurityDemoApplication",
+            "projectName": "spring-security-demo",
+            "args": "--spring.profiles.active=insecure",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-SecurityDemoApplication<security-demo>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "org.grantharper.websecurity.SecurityDemoApplication",
             "projectName": "security-demo",
-            "args": "--spring.profiles.active=insecure",
+            "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
     ]

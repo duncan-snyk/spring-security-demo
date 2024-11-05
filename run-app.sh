@@ -1,2 +1,2 @@
 #!/bin/bash
-java $@ -jar security-demo.jar
+java $@ -jar spring-security-demo.jar
