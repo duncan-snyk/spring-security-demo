@@ -55,6 +55,11 @@ jobs:
         run: |
           mvn clean
           mvn -B package --file pom.xml
+
+      - name: Debug
+        run: |
+          ls 
+          ls target
     
       - uses: actions/checkout@v4
       - name: Set up Snyk CLI to check for security issues
