@@ -90,7 +90,7 @@ jobs:
 
         # Build the docker image for testing
       - name: Build a Docker image
-        run: docker build -t duncan/spring-security-demo .
+        run: docker build --progress=plain -t duncan/spring-security-demo .
         # Runs Snyk Container (Container and SCA) analysis and uploads result to Snyk.
       - name: Snyk Container monitor
         run: snyk container monitor duncan/spring-security-demo --file=Dockerfile || true
