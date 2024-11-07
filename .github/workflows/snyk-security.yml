@@ -96,6 +96,7 @@ jobs:
 
   # Do the docker build and as a separate job just for the example
   docker:
+    needs: snyk
     env:
       # This is where you will need to introduce the Snyk API token created with your Snyk account
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
