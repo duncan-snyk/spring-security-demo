@@ -58,7 +58,6 @@ jobs:
       - name: build the app
         run: |
           mvn clean
-          echo "TOKEN $GITHUB_TOKEN / ACTOR $GITHUB_ACTOR"
           mvn -B package --file pom.xml
     
       - name: Set up Snyk CLI to check for security issues
@@ -95,7 +94,9 @@ jobs:
 
         # Publish the built artifact to the github maven repo
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        run: |
+          echo "TOKEN $GITHUB_TOKEN / ACTOR $GITHUB_ACTOR"
+          mvn deploy -s $GITHUB_WORKSPACE/settings.xml
 
   # Do the docker build and as a separate job just for the example
   docker:
