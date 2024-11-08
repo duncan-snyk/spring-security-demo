@@ -94,6 +94,8 @@ jobs:
 
         # Publish the built artifact to the github maven repo
       - name: Publish to GitHub Packages Apache Maven
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "TOKEN $GITHUB_TOKEN / ACTOR $GITHUB_ACTOR"
           mvn deploy -s $GITHUB_WORKSPACE/settings.xml
