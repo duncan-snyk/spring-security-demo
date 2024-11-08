@@ -51,13 +51,14 @@ jobs:
           settings-path: ${{ github.workspace }} # location for the settings.xml file
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: unit tests
         run: mvn -B test --file pom.xml
 
       - name: build the app
         run: |
           mvn clean
+          echo "TOKEN $GITHUB_TOKEN / ACTOR $GITHUB_ACTOR"
           mvn -B package --file pom.xml
     
       - name: Set up Snyk CLI to check for security issues
