@@ -51,8 +51,6 @@ jobs:
           java-version: 8
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: unit tests
         run: mvn -B test --file pom.xml
@@ -94,13 +92,16 @@ jobs:
         with:
           sarif_file: snyk-code.sarif
 
+      - name: Automated Github Action Maven Version Bump
+        uses: mickem/gh-action-bump-maven-version@v1.0.0
+            
         # Publish the built artifact to the github maven repo
       - name: Publish to GitHub Packages Apache Maven
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: steps.bump.outputs.bumped == false
         run: |
-          echo "TOKEN $GITHUB_TOKEN / ACTOR $GITHUB_ACTOR"
-          mvn -e -X deploy -s $GITHUB_WORKSPACE/settings.xml
+          mvn deploy -s $GITHUB_WORKSPACE/settings.xml
 
   # Do the docker build and as a separate job just for the example
   docker:
@@ -110,8 +111,7 @@ jobs:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     permissions:
       contents: read # for actions/checkout to fetch code
-      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+      packages: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
