@@ -98,7 +98,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "TOKEN $GITHUB_TOKEN / ACTOR $GITHUB_ACTOR"
-          mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+          mvn -e -X deploy -s $GITHUB_WORKSPACE/settings.xml
 
   # Do the docker build and as a separate job just for the example
   docker:
