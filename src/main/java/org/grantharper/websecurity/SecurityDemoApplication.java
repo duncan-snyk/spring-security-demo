@@ -1,5 +1,5 @@
 /**
-* Spring Boot main class
+* Spring Boot main class - bump
 **/
 package org.grantharper.websecurity;
 
