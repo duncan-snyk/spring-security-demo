@@ -17,10 +17,6 @@ jobs:
                -d '{"token": "'$ACTIONS_ID_TOKEN_REQUEST_TOKEN'"}' | jq -r .token)
                echo "SNYK_OAUTH_TOKEN=$TOKEN" >> $GITHUB_ENV
 
-               
-      - name: Setup Snyk
-        uses: snyk/actions/setup@master
-      
       - name: Checkout code
         uses: actions/checkout@v4
       
@@ -39,13 +35,13 @@ jobs:
         run: |
           mvn clean
           mvn -B package --file pom.xml
+          
       - name: Set up Snyk CLI to check for security issues
         # Snyk can be used to break the build when it detects security issues.
         # In this case we want to upload the SAST issues to GitHub Code Scanning
         uses: snyk/actions/setup@806182742461562b67788a64410098c9d9b96adb
 
-     
         # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
         # Use || true to not fail the pipeline
       - name: Run snyk test
-        run: snyk test
+        run: snyk code test --debug
