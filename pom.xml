@@ -5,7 +5,7 @@
 
 	<groupId>org.grantharper</groupId>
 	<artifactId>spring-security-demo</artifactId>
-	<version>0.0.22</version>
+	<version>0.0.23</version>
 	<packaging>jar</packaging>
 
 	<name>spring-security-demo</name>
