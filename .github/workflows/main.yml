@@ -22,6 +22,8 @@ jobs:
                echo "RESPONSE=$RESPONSE"
                SNYK_TOKEN=$(echo $RESPONSE | jq -r .token)
                echo "SNYK_TOKEN=$SNYK_TOKEN" >> $GITHUB_ENV
+               echo "GITHUB_ENV = $GITHUB_ENV"
+               echo "SNYK_TOKEN = $SNYK_TOKEN"
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -51,4 +53,4 @@ jobs:
         # Use || true to not fail the pipeline
       - name: Run snyk test
         run: |
-          . ./$GITHUB_ENV ; snyk code test --debug
+          . $GITHUB_ENV ; snyk code test --debug
