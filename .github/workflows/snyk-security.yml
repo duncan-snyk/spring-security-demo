@@ -79,12 +79,12 @@ jobs:
 
         # Runs Snyk Open Source (SCA) analysis and uploads result to Snyk.
       - name: Snyk Open Source monitor
-        run: snyk monitor --all-projects || true
+        run: snyk monitor --org=6a72044c-629a-4d2f-b8c9-4f6b386c9b27 || true
 
         # Runs Snyk Infrastructure as Code (IaC) analysis and uploads result to Snyk.
         # Use || true to not fail the pipeline.
       - name: Snyk IaC test and report
-        run: snyk iac test --report || true
+        run: snyk iac test --report --org=6a72044c-629a-4d2f-b8c9-4f6b386c9b27 || true
 
         # Push the Snyk Code results into GitHub Code Scanning tab
       - name: Upload result to GitHub Code Scanning
