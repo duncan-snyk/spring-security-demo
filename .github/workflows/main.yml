@@ -52,4 +52,4 @@ jobs:
         # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
         # Use || true to not fail the pipeline
       - name: Run snyk test
-        run: snyk code test --debug
+        run: snyk code test --debug --org=84344b9b-eb07-4a74-a4f2-ee80ba95e1fd
