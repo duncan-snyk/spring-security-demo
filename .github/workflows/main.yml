@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Request Snyk Token
         run: |
-               RESPONSE=$(curl -X POST "'${{ vars.OIDC_EXCHANGE_URL }}'" \
+               RESPONSE=$(curl -X POST "${{ vars.OIDC_EXCHANGE_URL }}" \
                -H "Content-Type: application/json" \
                -d '{"token": "'$ACTIONS_ID_TOKEN_REQUEST_TOKEN'"}')
                SNYK_TOKEN=$(echo $RESPONSE | jq -r .token)
