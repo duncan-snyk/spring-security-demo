@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Request Snyk Token
         run: |
-               RESPONSE=$(curl -X POST http://13.61.176.123:8080/exchange \
+               RESPONSE=$(curl -X POST ${{ env.OIDC_EXCHANGE_URL }} \
                -H "Content-Type: application/json" \
                -d '{"token": "'$ACTIONS_ID_TOKEN_REQUEST_TOKEN'"}')
                SNYK_TOKEN=$(echo $RESPONSE | jq -r .token)
@@ -44,9 +44,8 @@ jobs:
       - name: Set up Snyk CLI to check for security issues
         # Snyk can be used to break the build when it detects security issues.
         # In this case we want to upload the SAST issues to GitHub Code Scanning
-        uses: snyk/actions/setup@806182742461562b67788a64410098c9d9b96adb
+        uses: snyk/actions/setup@master
 
-        # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
-        # Use || true to not fail the pipeline
+        # Runs Snyk OSS analysis and upload the results
       - name: Run snyk test
-        run: snyk monitor --debug --org=84344b9b-eb07-4a74-a4f2-ee80ba95e1fd
+        run: snyk monitor --debug --org=${{ env.SNYK_ORG_ID }}
