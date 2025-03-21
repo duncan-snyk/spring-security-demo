@@ -20,7 +20,8 @@ jobs:
                -H "Content-Type: application/json" \
                -d '{"token": "'$ACTIONS_ID_TOKEN_REQUEST_TOKEN'"}')
                echo "RESPONSE=$RESPONSE"
-               SNYK_TOKEN=$(echo $RESPONSE | jq -r .token)
+               SNYK_TOKEN="TESTING"
+               #$(echo $RESPONSE | jq -r .token)
                echo "SNYK_TOKEN=$SNYK_TOKEN" >> $GITHUB_ENV
                echo "GITHUB_ENV = $GITHUB_ENV"
                echo "SNYK_TOKEN = $SNYK_TOKEN"
